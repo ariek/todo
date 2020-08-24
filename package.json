@@ -1,0 +1,17 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel src/index.pug -d dist",
+    "build": "rm -f docs/*.{css,map,js,svg,jpg,png,gif}; parcel build src/index.pug --no-source-maps --public-url ./ -d docs"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-svelte": "^4.0.6",
+    "pug": "^3.0.0",
+    "stylus": "^0.54.8",
+    "svelte": "^3.24.1"
+  }
+}
