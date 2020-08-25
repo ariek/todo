@@ -57,14 +57,14 @@
         <div class="schedule">
           <div class="m-schedule" data-value="{item.date}">
             <label>
-              <input type="date" name="date" bind:value="{item.date}" on:change="{tasks.sort}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+              <input type="date" name="date" bind:value="{item.date}" on:blur="{tasks.sort}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
             </label>
           </div>
         </div>
         <div class="priority">
           <div class="m-priority" data-value="{item.priority}">
             <label>
-              <select bind:value="{item.priority}" on:change="{tasks.sort}">
+              <select bind:value="{item.priority}" on:blur="{tasks.sort}">
                 {#each priorityList as priorityListItem}
                   <option value="{priorityListItem.value}">{priorityListItem.text}</option>
                 {/each}
