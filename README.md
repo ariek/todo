@@ -7,7 +7,7 @@ Simple to-do list app made with Svelte.js.
 `$ yarn`
 
 ### Run
-`$ yarn run start`
+`$ yarn start`
 
 ### Build
-`$ yarn run build`
+`$ yarn build`
