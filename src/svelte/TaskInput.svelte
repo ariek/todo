@@ -1,14 +1,15 @@
 <script>
   import moment from 'moment'
-  import { priorityList } from '../js/config.js'
+  import { priorityList, tagList } from '../js/config.js'
   import { tasks } from '../js/tasks.js'
 
   let title = ''
   let date = moment().format('YYYY-MM-DD')
   let priority = 0
+  let tag = ''
 
   const onSubmitForm = (e) => {
-    tasks.add(title,priority,date)
+    tasks.add(title,tag,priority,date)
     e.target.title.value = ''
   }
 
@@ -30,6 +31,17 @@
         <label>
           <select name="priority" bind:value="{priority}">
             {#each priorityList as item}
+              <option value="{item.value}">{item.text}</option>
+            {/each}
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="tag">
+      <div class="m-tag">
+        <label>
+          <select name="tag" bind:value="{tag}">
+            {#each tagList as item}
               <option value="{item.value}">{item.text}</option>
             {/each}
           </select>

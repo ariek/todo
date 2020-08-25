@@ -3,12 +3,13 @@ import { taskListData } from './stores.js';
 
 let taskList = JSON.parse(localStorage.getItem('taskListData')) || []
 
-const add = (title,priority,date) => {
+const add = (title,tag,priority,date) => {
   if(!title) return false
   let now = new Date()
   let item = {
     create: now.getTime(),
     title: title,
+    tag: tag || '',
     priority: priority || 0,
     date: date || '1970-01-01',
     timestamp: moment(date || '1970-01-01').format('X'),

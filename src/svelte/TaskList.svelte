@@ -1,6 +1,6 @@
 <script>
   import moment from 'moment'
-  import { priorityList } from '../js/config.js';
+  import { tagList, priorityList } from '../js/config.js';
   import { taskListData } from '../js/stores.js';
   import { tasks } from '../js/tasks.js'
 
@@ -67,6 +67,17 @@
               <select bind:value="{item.priority}" on:change="{tasks.sort}">
                 {#each priorityList as priorityListItem}
                   <option value="{priorityListItem.value}">{priorityListItem.text}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="tag">
+          <div class="m-tag" data-value="{item.tag}">
+            <label>
+              <select bind:value="{item.tag}" on:change="{tasks.sort}">
+                {#each tagList as tagListItem}
+                  <option value="{tagListItem.value}">{tagListItem.text}</option>
                 {/each}
               </select>
             </label>
