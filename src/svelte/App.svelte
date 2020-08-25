@@ -3,6 +3,10 @@
   import TaskInput from './TaskInput.svelte';
 </script>
 <div class="l-page">
-  <TaskList />
+  <div class="l-content">
+    <TaskList />
+  </div>
+  <div class="l-bottom">
+    <TaskInput />
+  </div>
 </div>
-<TaskInput />

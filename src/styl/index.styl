@@ -50,13 +50,13 @@ img
 /**
  * page style
  */
-linkColor = #667899
-baseColor = #e7eaef
+$linkColor = #667899
+$baseColor = #e7eaef
 
-// red =     #F44336
-// yellow =  #FF9800
-// green =   #4CAF50
-// blue =    #2196F3
+$red =     #F44336
+$yellow =  #FF9800
+$green =   #4CAF50
+$blue =    #03A9F4
 
 checkbox-label()
   display block
@@ -69,31 +69,36 @@ checkbox-label()
     left -30px
     top -30px
     + span
-      margin 2px
+      margin 5px
+      border 2px solid #000
       display block
-      width 26px
-      height 26px
+      width 20px
+      height 20px
       border-radius 13px 
       text-indent -300px
       position relative
+      opacity .3
       &:after
         content ""
         position absolute
         left 3px
         top 5px
-        width 18px
-        height 9px
-        border 4px solid rgba(0,0,0,.1)
-        border-width 0 0 4px 4px
+        width 10px
+        height 5px
+        border 2px solid #000
+        border-width 0 0 2px 2px
         transform rotate(-45deg)
+        opacity 0
     &:checked
-      + span 
+      + span
+        opacity .6
         &:after
-          border-color linkColor
+          border-color $linkColor
+          opacity 1
 body
   color rgba(0,0,0,.6)
-  background baseColor
-  font-family: system-ui, "Hiragino Sans", "YuGothic", "Arial", sans-serif
+  background $baseColor
+  font-family system-ui, "Hiragino Sans", "YuGothic", "Arial", sans-serif
   font-size 14px
   line-height 1
   height 100vh
@@ -112,146 +117,274 @@ label
   top 0
   bottom 0
   overflow hidden  
-.l-page
+.l-content
   position fixed
   left 0
   right 0
   top 0
-  bottom 60px
+  bottom 80px
   overflow-x hidden
   overflow-y auto
-.c-taskList
-  padding 20px 10px
-  .until
-    text-align center
-    font-size 12px
-    font-weight bold
-    color rgba(0,0,0,.4)
-    position relative
-    &:before
-      content ""
-      position absolute
-      left 0
-      right 0
-      top 50%
-      display block
-      width 100%
-      height 1px
-      background rgba(0,0,0,.1)
-    span
-      padding 0 10px
-      position relative
-      display inline-block
-      background baseColor
-  .task
-    padding 5px 0
-    color linkColor
-    display flex
-    position relative
-    + .task
-      border-top 1px dotted rgba(0,0,0,.1)
-    &.is-done
-      .title input[type="text"]
-        text-decoration line-through
-  label.done
-    checkbox-label()
-  .title
-    width calc(100% - 120px)
-    height 30px
-    input[type="text"]
-      transform scale(14/16)
-      transform-origin left top
-      padding 0 (16/14*10)px
-      outline 0
-      border 0
-      border-radius (16/14*15)px
-      width (16/14*100)%
-      height (16/14*100)%
-      background baseColor
-
-.c-taskInput
+.l-bottom
   z-index 1
   position fixed
   left 0
   right 0
   bottom 0
-  padding 10px
-  background baseColor
+.c-taskList
+  padding 20px 10px
+  .date
+    padding 2px 0
+    font-size 12px
+    font-weight bold
+    color rgba(0,0,0,.4)
+    position relative
+    text-align center
+    &:before
+      content ""
+      position absolute
+      left 0
+      right 0
+      top calc(50% - 1px)
+      display block
+      width 100%
+      height 2px
+      background rgba(0,0,0,.07)
+    .dateInner
+      margin-left 20px
+      padding 0 10px 0
+      position relative
+      display inline-block
+      background $baseColor
+    .text
+      font-weight normal
+  .task
+    padding 5px 0
+    color $linkColor
+    position relative
+    height 40px
+    overflow hidden
+    //transition height .3s
+    .menu
+      opacity .5
+    &.shows-property
+      height 70px
+      .menu
+        opacity 1
+    + .task
+      border-top 1px dotted rgba(0,0,0,.1)
+    .main
+      margin-bottom 5px
+      display flex
+    &[data-done="true"]
+      .title input[type="text"]
+        text-decoration line-through
+    &[data-priority="0"]
+      label.done input[type="checkbox"]
+        + span
+        + span:after
+          border-color #808080
+    &[data-priority="1"]
+      label.done input[type="checkbox"]
+        + span
+        + span:after
+          border-color $green
+    &[data-priority="2"]
+      label.done input[type="checkbox"]
+        + span
+        + span:after
+          border-color $yellow
+    &[data-priority="3"]
+      label.done input[type="checkbox"]
+        + span
+        + span:after
+          border-color $red
+  label.done
+    checkbox-label()
+  .title
+    width calc(100% - 60px)
+    height 30px
+    input[type="text"]
+      transform scale(14/16)
+      transform-origin left top
+      padding 0
+      outline 0
+      border 0
+      width (16/14*100)%
+      height (16/14*100)%
+      background $baseColor
+  .menu
+    padding 5px
+    width 30px
+    height 30px
+  .property
+    display flex
+    justify-content flex-end
+    position relative
+    padding-left 55px
+  .priority
+  .schedule
+  .remove
+    margin-left 5px
+  .remove
+    position absolute
+    left 0
+    top 0
+.c-taskInput
+  padding 10px 10px 0
+  background $baseColor
   box-shadow 0 -5px 10px rgba(0,0,0,.05)
   .title
     padding 10px 40px 10px 20px
     border-radius 20px
-    width calc(100% - 70px)
+    //width calc(100% - 70px)
     height 40px
-    background baseColor
+    background $baseColor
     box-shadow 1px 1px 2px rgba(0,0,0,0.15) inset, 1px 1px 2px rgba(255,255,255,1)
-  .titleInner
+    .titleInner
+      width 100%
+      height 20px
+    input[type="text"]
+      padding 0
+      display block
+      transform scale(14/16)
+      transform-origin left top
+      width (16/14*100)%
+      height (16/14*100)%
+      outline 0
+      border 0
+      //color $linkColor
+      background $baseColor
+      &:focus
+        background $baseColor
+      &::placeholder
+        color rgba(102, 119, 136, .4)
+  .submit
+    position absolute
+    right 15px
+    top 15px
+    button.add
+      width 30px
+      height 30px
+      overflow hidden
+      text-indent -999px
+      font-size 12px
+      font-weight bold
+      border 0
+      border-radius 15px
+      color $linkColor
+      background url('../img/add.svg') no-repeat 50% 50% $baseColor
+      box-shadow 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 2px rgba(255,255,255,1) inset
+      outline none
+  .property
+    padding 5px 0
     width 100%
+    height 30px
+    display flex
+    justify-content flex-end
+    overflow hidden
+  .schedule
+    margin-left 5px
+  .priority
+    margin-left 5px
+.m-priority
+.m-schedule
+  height 20px
+  position relative
+  border-radius 3px
+  color $linkColor
+  background rgba(102, 119, 136, .1)
+  &::before
+    content ""
+    position absolute
+    top 0
+    left 0
     height 20px
-  input[type="text"]
-    padding 0
+    width 20px
+    background no-repeat 50% 50% / 16px 
+  label
+    width 100px
+    height 20px
     display block
-    transform scale(14/16)
+  input[type="date"]
+  select
+    padding 0 0 0 (20*16/12)px
+    display block
+    transform scale(12/16)
     transform-origin left top
-    width (16/14*100)%
-    height (16/14*100)%
+    width (16/12*100)%
+    height (16/12*100)%
     outline 0
     border 0
-    background baseColor
-    &:focus
-      background baseColor
-  button.add
-    position absolute
-    right 85px
-    top 15px
-    width 30px
-    height 30px
-    overflow hidden
-    text-indent -999px
-    font-size 12px
-    font-weight bold
-    border 0
-    border-radius 15px
-    color linkColor
-    background url('../img/add.svg') no-repeat 50% 50% baseColor
-    box-shadow 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 2px rgba(255,255,255,1) inset
-    outline none
-  .priority
-  .schedule
-    position absolute
-    top 15px
-  .priority
-    right 40px
-  .schedule
-    right 10px
-.m-priority
-.m-schedule
-  width 30px
-  overflow hidden
-  select
-    opacity 0
-    outline none
-    border 0
-    background baseColor
-    width 30px
-    height 30px
+    background transparent
+    text-overflow '...'
     appearance none
     &:focus
-      box-shadow 1px 1px 2px rgba(0,0,0,0.15) inset, 1px 1px 2px rgba(255,255,255,1)
+      background transparent
 .m-priority
-  background no-repeat 50% 50%
-  background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23667899%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
-  &[data-value="0"]
+  &::before
+    background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23808080%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
+  &[data-value="3"]::before
     background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23F44336%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
-  &[data-value="1"]
+  &[data-value="2"]::before
     background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23FF9800%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
-  &[data-value="2"]
+  &[data-value="1"]::before
     background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%238BC34A%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
+  label
+    width 80px
 .m-schedule
-  background url('../img/calendar-event.svg') no-repeat 50% 50%
+  &::before
+    background-image url('../img/calendar-event.svg')
+  label
+    width 100px
+  input[type="date"]
+    text-align center
+    &:focus
+      background transparent
+    &::-webkit-inner-spin-button
+    &::-webkit-clear-button
+      -webkit-appearance none
+    &::-webkit-calendar-picker-indicator
+      position absolute
+      left 0
+      top 0
+      bottom 0
+      margin auto
+      padding 0
+      background transparent
+      color transparent
+      cursor pointer
+      height (30*16/12)px
+      width (130*16/12)px
+      z-index 1
 .m-remove
+  padding 0 0 0 20px
   border 0
   outline 0
-  background url('../img/trash.svg') no-repeat 50% 50%
-  width 30px
-  height 30px
+  width 50px
+  height 20px
+  font-size 12px
+  text-align left
+  height 20px
+  position relative
+  border-radius 3px
+  color $linkColor
+  //background rgba(102, 119, 136, .1)
+  background transparent
+  border 1px solid $linkColor
+
+  &::before
+    content ""
+    position absolute
+    top 0
+    left 0
+    height 20px
+    width 20px
+    background no-repeat 50% 50% / 16px 
+    background-image url('../img/trash.svg')
+.m-menu
+  border 0
+  outline 0
+  background url('../img/dots.svg') no-repeat 50% 50% / 16px
+  width 20px
+  height 20px

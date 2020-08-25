@@ -1,10 +1,11 @@
 <script>
-  import { scheduleList, priorityList } from '../js/config.js';
+  import moment from 'moment'
+  import { priorityList } from '../js/config.js';
   import { taskListData } from '../js/stores.js';
   import { tasks } from '../js/tasks.js'
 
   const onClickRemoveBtn = (e) => {
-    let create = Number(event.target.getAttribute('data-create'))
+    let create = Number(e.target.getAttribute('data-create'))
     tasks.remove(create)
   }
 
@@ -13,31 +14,65 @@
     e.target.title.blur()
   }
 
+  const getDateStr = (dateStr) => {
+    const now = moment()
+    const todayStr = now.format('YYYY-MM-DD')
+    const tomorrowStr = now.add(1,'day').format('YYYY-MM-DD')
+    let str = ''
+
+    if(!dateStr) return false
+
+    if(dateStr === todayStr){
+      str = '今日'
+    } else if(dateStr === tomorrowStr){
+      str = '明日'
+    } else if(moment(dateStr).isBefore(now)){
+      str = '期限切れ'
+    } else {
+      str = moment(dateStr).format('M/D')
+    }
+
+    return str
+  }
+
   //tasks.reset()
 </script>
 <div class="c-taskList">
   {#each $taskListData as item, i}
-    {#if !$taskListData[i - 1] || $taskListData[i - 1].schedule !== item.schedule}
-      <div class="until"><span>{scheduleList[item.schedule]}</span></div>
+    {#if !$taskListData[i - 1] || getDateStr($taskListData[i - 1].date) !== getDateStr(item.date)}
+      <div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div>
     {/if}
-    <div class="task{(item.done) ? ' is-done' : ''}">
-      <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
-      <form class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}"></form>
-      <div class="m-priority" data-value="{item.priority}">
-        <select bind:value="{item.priority}" on:change="{tasks.sort}">
-          {#each priorityList as priorityListItem,j}
-            <option value="{j}">{priorityListItem}</option>
-          {/each}
-        </select>
+    <div class="task{item.property ? ' shows-property' : ''}" data-priority="{item.priority}" data-done="{item.done}">
+      <div class="main">
+        <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
+        <form class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}"></form>
+        <div class="menu">
+          <button type="button" class="m-menu" on:click="{() => {item.property = !item.property; tasks.save()}}"></button>
+        </div>     
       </div>
-      <div class="m-schedule" data-value="{item.schedule}">
-        <select bind:value="{item.schedule}" on:change="{tasks.sort}">
-          {#each scheduleList as scheduleListItem,j}
-            <option value="{j}">{scheduleListItem}</option>
-          {/each}
-        </select>
+      <div class="property">
+        <div class="remove">
+          <button type="button" class="m-remove" on:click="{onClickRemoveBtn}" data-create="{item.create}">削除</button>
+        </div>
+        <div class="schedule">
+          <div class="m-schedule" data-value="{item.date}">
+            <label>
+              <input type="date" name="date" bind:value="{item.date}" on:change="{tasks.sort}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+            </label>
+          </div>
+        </div>
+        <div class="priority">
+          <div class="m-priority" data-value="{item.priority}">
+            <label>
+              <select bind:value="{item.priority}" on:change="{tasks.sort}">
+                {#each priorityList as priorityListItem}
+                  <option value="{priorityListItem.value}">{priorityListItem.text}</option>
+                {/each}
+              </select>
+            </label>
+          </div>
+        </div>
       </div>
-      <button type="button" class="m-remove" on:click="{onClickRemoveBtn}" data-create="{item.create}">-</button>
     </div>
   {/each}
 </div>

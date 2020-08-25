@@ -1,17 +1,20 @@
+import moment from 'moment'
 import { taskListData } from './stores.js';
 
 let taskList = JSON.parse(localStorage.getItem('taskListData')) || []
 
-const add = (title,priority,schedule) => {
+const add = (title,priority,date) => {
   if(!title) return false
   let now = new Date()
   let item = {
     create: now.getTime(),
     title: title,
     priority: priority || 0,
-    schedule: schedule || 0,
+    date: date || '1970-01-01',
+    timestamp: moment(date || '1970-01-01').format('X'),
     repeat: false,
-    done: false
+    done: false,
+    property: false
   }
   taskList.push(item)
   sort()
@@ -22,10 +25,13 @@ const remove = (create) => {
   sort()
 }
 
-const sort = () => {    
+const sort = () => {
+  taskList.forEach(item => {
+    item.timestamp = moment(item.date || '1970-01-01').format('X')
+  })
   taskList = taskList.sort((a,b) => a.create - b.create)
-  taskList = taskList.sort((a,b) => a.priority - b.priority)
-  taskList = taskList.sort((a,b) => a.schedule - b.schedule)
+  taskList = taskList.sort((a,b) => b.priority - a.priority)
+  taskList = taskList.sort((a,b) => a.timestamp - b.timestamp)
   save()
 }
 

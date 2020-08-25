@@ -1,37 +1,43 @@
 <script>
-  import { scheduleList, priorityList } from '../js/config.js';
+  import moment from 'moment'
+  import { priorityList } from '../js/config.js'
   import { tasks } from '../js/tasks.js'
-  
+
+  let title = ''
+  let date = moment().format('YYYY-MM-DD')
+  let priority = 0
+
   const onSubmitForm = (e) => {
-    let title = e.target.title.value
-    let priority = Number(e.target.priority.value) || 0
-    let schedule = Number(e.target.schedule.value) || 0
-    tasks.add(title,priority,schedule)
+    tasks.add(title,priority,date)
     e.target.title.value = ''
   }
 
 </script>
 <form class="c-taskInput" on:submit|preventDefault="{onSubmitForm}">
   <div class="title">
-    <div class="titleInner"><input type="text" name="title"></div>
+    <div class="titleInner"><input type="text" name="title" bind:value="{title}" placeholder="やることを入力"></div>
   </div>
-  <div class="priority m-priority">
-    <select name="priority">
-      {#each priorityList as item,index}
-        {#if index == 1}
-        <option value="{index}" selected>{item}</option>
-        {:else}
-        <option value="{index}">{item}</option>
-        {/if}
-      {/each}
-    </select>
+  <div class="property">
+    <div class="schedule">
+      <div class="m-schedule">
+        <label>
+          <input type="date" name="date" bind:value="{date}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+        </label>
+      </div>
+    </div>
+    <div class="priority">
+      <div class="m-priority" data-value="{priority}">
+        <label>
+          <select name="priority" bind:value="{priority}">
+            {#each priorityList as item}
+              <option value="{item.value}">{item.text}</option>
+            {/each}
+          </select>
+        </label>
+      </div>
+    </div>
   </div>
-  <div class="schedule m-schedule">
-    <select name="schedule">
-      {#each scheduleList as item,index}
-        <option value="{index}">{item}</option>
-      {/each}
-    </select>
+  <div class="submit">
+    <button type="submit" class="add">+</button>
   </div>
-  <button type="submit" class="add">+</button>
 </form>
