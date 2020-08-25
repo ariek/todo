@@ -57,12 +57,7 @@
         <div class="schedule">
           <div class="m-schedule" data-value="{item.date}">
             <label>
-              <input type="date" name="date" value="{item.date}" on:blur="{
-                (e) => {
-                  item.date = e.target.value
-                  tasks.sort
-                }
-              }" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+              <input type="date" name="date" bind:value="{item.date}" on:blur="{tasks.sort}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
             </label>
           </div>
         </div>
