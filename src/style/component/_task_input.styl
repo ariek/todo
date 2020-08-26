@@ -1,20 +1,18 @@
 .c-taskInput
-  padding 0 10px 5px
   background $baseColor
   box-shadow 0 -5px 10px rgba(0,0,0,.05)
   height 50px
-  transition height .1s
+  transition height .15s
   position relative
   overflow hidden
-  &:focus
-  &.is-focused
+  &:focus-within
     height 75px
     outline none
   form
     position absolute
     left 10px
     right 10px
-    bottom 5px
+    top 5px
     height 70px
   .title
     padding 10px 40px 10px 20px
@@ -44,7 +42,7 @@
   .submit
     position absolute
     right 5px
-    bottom 5px
+    top 5px
     button.add
       width 30px
       height 30px

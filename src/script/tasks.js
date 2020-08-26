@@ -35,13 +35,25 @@ const update = (create,key,value) => {
   save()
 }
 
-const sort = () => {
+const sort = (key = 'date', orderBy = 'ASC') => {
+  const sortByKey = (key,orderBy = 'ASC') => {
+    taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (a[key] - b[key]))
+  }
   taskList.forEach(item => {
     item.timestamp = moment(item.date || '1970-01-01').format('X')
   })
-  taskList = taskList.sort((a,b) => a.create - b.create)
-  taskList = taskList.sort((a,b) => b.priority - a.priority)
-  taskList = taskList.sort((a,b) => a.timestamp - b.timestamp)
+  sortByKey('create')
+  if(key === 'date'){
+    sortByKey('priority')
+    sortByKey('timestamp', orderBy)
+  } else if(key === 'priority'){
+    sortByKey('timestamp')
+    sortByKey('priority', orderBy)
+  } else if(key === 'tag'){
+    sortByKey('priority')
+    sortByKey('timestamp')
+    sortByKey('tag', orderBy)
+  }
   save()
 }
 
