@@ -2,6 +2,20 @@
   padding 0 10px 5px
   background $baseColor
   box-shadow 0 -5px 10px rgba(0,0,0,.05)
+  height 50px
+  transition height .1s
+  position relative
+  overflow hidden
+  &:focus
+  &.is-focused
+    height 75px
+    outline none
+  form
+    position absolute
+    left 10px
+    right 10px
+    bottom 5px
+    height 70px
   .title
     padding 10px 40px 10px 20px
     border-radius 20px
@@ -29,8 +43,8 @@
         color rgba(102, 119, 136, .4)
   .submit
     position absolute
-    right 15px
-    bottom 10px
+    right 5px
+    bottom 5px
     button.add
       width 30px
       height 30px
