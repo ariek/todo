@@ -1,11 +1,6 @@
 <script>
   import moment from 'moment'
-<<<<<<< HEAD
   import { tagList, priorityList } from '../js/config.js';
-=======
-import { element } from 'svelte/internal';
-  import { priorityList } from '../js/config.js';
->>>>>>> feature/1.0.1
   import { taskListData } from '../js/stores.js';
   import { tasks } from '../js/tasks.js'
 
