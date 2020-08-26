@@ -51,6 +51,7 @@ import { element } from 'svelte/internal';
           <button type="button" class="m-menu" on:click="{
             (event) => {
               item.property = !item.property
+              tasks.save()
             }
           }"></button>
         </div>     
