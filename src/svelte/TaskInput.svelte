@@ -5,7 +5,7 @@
 
   let title = ''
   let date = moment().format('YYYY-MM-DD')
-  let priority = 0
+  let priority = 4
   let tag = ''
 
   const onSubmitForm = (e) => {
@@ -15,9 +15,6 @@
 
 </script>
 <form class="c-taskInput" on:submit|preventDefault="{onSubmitForm}">
-  <div class="title">
-    <div class="titleInner"><input type="text" name="title" bind:value="{title}" placeholder="やることを入力"></div>
-  </div>
   <div class="property">
     <div class="schedule">
       <div class="m-schedule">
@@ -48,6 +45,9 @@
         </label>
       </div>
     </div>
+  </div>
+  <div class="title">
+    <div class="titleInner"><input type="text" name="title" bind:value="{title}" placeholder="やることを入力"></div>
   </div>
   <div class="submit">
     <button type="submit" class="add">+</button>

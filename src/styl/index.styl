@@ -16,7 +16,7 @@ html
   scroll-behavior smooth
 
 body
-  min-height 100vh
+  //min-height 100vh
   text-rendering optimizeSpeed
   line-height 1.5
 
@@ -122,7 +122,7 @@ label
   left 0
   right 0
   top 0
-  bottom 80px
+  bottom 75px
   overflow-x hidden
   overflow-y auto
 .l-bottom
@@ -159,22 +159,22 @@ label
     .text
       font-weight normal
   .task
-    padding 5px 0
+    padding 2px 0
     color $linkColor
     position relative
-    height 40px
+    height 34px
     overflow hidden
     //transition height .3s
     .menu
       opacity .5
     &.shows-property
-      height 70px
+      height 60px
       .menu
         opacity 1
     + .task
       border-top 1px dotted rgba(0,0,0,.1)
     .main
-      margin-bottom 5px
+      margin-bottom 2px
       display flex
     &[data-done="true"]
       .title input[type="text"]
@@ -232,7 +232,7 @@ label
     left 0
     top 0
 .c-taskInput
-  padding 10px 10px 0
+  padding 0 10px 5px
   background $baseColor
   box-shadow 0 -5px 10px rgba(0,0,0,.05)
   .title
@@ -263,7 +263,7 @@ label
   .submit
     position absolute
     right 15px
-    top 15px
+    bottom 10px
     button.add
       width 30px
       height 30px
