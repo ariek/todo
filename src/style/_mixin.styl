@@ -1,0 +1,37 @@
+checkbox-label()
+  display block
+  width 30px
+  height 30px
+  position relative
+  overflow hidden
+  input[type="checkbox"]
+    position absolute
+    left -30px
+    top -30px
+    + span
+      margin 5px
+      border 2px solid #000
+      display block
+      width 20px
+      height 20px
+      border-radius 13px 
+      text-indent -300px
+      position relative
+      opacity .3
+      &:after
+        content ""
+        position absolute
+        left 3px
+        top 5px
+        width 10px
+        height 5px
+        border 2px solid #000
+        border-width 0 0 2px 2px
+        transform rotate(-45deg)
+        opacity 0
+    &:checked
+      + span
+        opacity .6
+        &:after
+          border-color $linkColor
+          opacity 1

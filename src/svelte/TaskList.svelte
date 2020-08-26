@@ -1,8 +1,8 @@
 <script>
   import moment from 'moment'
-  import { tagList, priorityList } from '../js/config.js';
-  import { taskListData } from '../js/stores.js';
-  import { tasks } from '../js/tasks.js'
+  import { tagList, priorityList } from '../script/config.js';
+  import { taskListData } from '../script/stores.js';
+  import { tasks } from '../script/tasks.js'
 
   const onClickRemoveBtn = (e) => {
     let create = Number(e.target.getAttribute('data-create'))

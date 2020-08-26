@@ -1,7 +1,7 @@
 <script>
   import moment from 'moment'
-  import { priorityList, tagList } from '../js/config.js'
-  import { tasks } from '../js/tasks.js'
+  import { priorityList, tagList } from '../script/config.js'
+  import { tasks } from '../script/tasks.js'
 
   let title = ''
   let date = moment().format('YYYY-MM-DD')

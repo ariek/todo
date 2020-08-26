@@ -1,0 +1,59 @@
+.c-taskInput
+  padding 0 10px 5px
+  background $baseColor
+  box-shadow 0 -5px 10px rgba(0,0,0,.05)
+  .title
+    padding 10px 40px 10px 20px
+    border-radius 20px
+    //width calc(100% - 70px)
+    height 40px
+    background $baseColor
+    box-shadow 1px 1px 2px rgba(0,0,0,0.15) inset, 1px 1px 2px rgba(255,255,255,1)
+    .titleInner
+      width 100%
+      height 20px
+    input[type="text"]
+      padding 0
+      display block
+      transform scale(14/16)
+      transform-origin left top
+      width (16/14*100)%
+      height (16/14*100)%
+      outline 0
+      border 0
+      //color $linkColor
+      background $baseColor
+      &:focus
+        background $baseColor
+      &::placeholder
+        color rgba(102, 119, 136, .4)
+  .submit
+    position absolute
+    right 15px
+    bottom 10px
+    button.add
+      width 30px
+      height 30px
+      overflow hidden
+      text-indent -999px
+      font-size 12px
+      font-weight bold
+      border 0
+      border-radius 15px
+      color $linkColor
+      background url('../img/add.svg') no-repeat 50% 50% $baseColor
+      box-shadow 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 2px rgba(255,255,255,1) inset
+      outline none
+  .property
+    padding 5px 0
+    width 100%
+    height 30px
+    display flex
+    justify-content flex-end
+    overflow hidden
+  .tag
+    margin-left 5px
+  .schedule
+    margin-left 5px
+  .priority
+    margin-left 5px
