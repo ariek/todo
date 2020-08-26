@@ -1,5 +1,6 @@
 <script>
   import moment from 'moment'
+import { element } from 'svelte/internal';
   import { priorityList } from '../js/config.js';
   import { taskListData } from '../js/stores.js';
   import { tasks } from '../js/tasks.js'
@@ -40,14 +41,18 @@
 <div class="c-taskList">
   {#each $taskListData as item, i}
     {#if !$taskListData[i - 1] || getDateStr($taskListData[i - 1].date) !== getDateStr(item.date)}
-      <div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div>
+      <!-- div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div -->
     {/if}
-    <div class="task{item.property ? ' shows-property' : ''}" data-priority="{item.priority}" data-done="{item.done}">
+    <div class="task{item.property ? ' shows-property' : ''}" data-create="{item.create}" data-priority="{item.priority}" data-done="{item.done}">
       <div class="main">
         <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
-        <form class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}"></form>
+        <form class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}" on:blur="{tasks.save}"></form>
         <div class="menu">
-          <button type="button" class="m-menu" on:click="{() => {item.property = !item.property; tasks.save()}}"></button>
+          <button type="button" class="m-menu" on:click="{
+            (event) => {
+              item.property = !item.property
+            }
+          }"></button>
         </div>     
       </div>
       <div class="property">
@@ -57,19 +62,14 @@
         <div class="schedule">
           <div class="m-schedule" data-value="{item.date}">
             <label>
-              <input type="date" name="date" value="{item.date}" on:blur="{
-                (e) => {
-                  item.date = e.target.value
-                  tasks.sort
-                }
-              }" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+              <input type="date" name="date" bind:value="{item.date}" on:change="{tasks.save}" on:blur="{tasks.save}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
             </label>
           </div>
         </div>
         <div class="priority">
           <div class="m-priority" data-value="{item.priority}">
             <label>
-              <select bind:value="{item.priority}" on:blur="{tasks.sort}">
+              <select name="priority" bind:value="{item.priority}" on:change="{tasks.save}" on:blur="{tasks.save}">
                 {#each priorityList as priorityListItem}
                   <option value="{priorityListItem.value}">{priorityListItem.text}</option>
                 {/each}
