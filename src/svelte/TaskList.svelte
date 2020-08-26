@@ -80,7 +80,7 @@
         <div class="tag">
           <div class="m-tag" data-value="{item.tag}">
             <label>
-              <select bind:value="{item.tag}" on:change="{tasks.sort}">
+              <select bind:value="{item.tag}" on:change="{tasks.save}" on:blur="{tasks.save}">
                 {#each tagList as tagListItem}
                   <option value="{tagListItem.value}">{tagListItem.text}</option>
                 {/each}
