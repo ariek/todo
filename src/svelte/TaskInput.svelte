@@ -5,7 +5,7 @@
 
   let title = ''
   let date = moment().format('YYYY-MM-DD')
-  let priority = 4
+  let priority = 3
   let tag = ''
 
   const onSubmitForm = (e) => {
