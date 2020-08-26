@@ -18,12 +18,21 @@ const add = (title,tag,priority,date) => {
     property: false
   }
   taskList.push(item)
-  sort()
+  save()
 }
 
 const remove = (create) => {
   taskList = taskList.filter(item => item.create !== create)
-  sort()
+  save()
+}
+
+const update = (create,key,value) => {
+  let index = taskList.findIndex((item) => {
+    return item.create === create
+  })
+  taskList[index][key] = value
+  taskList = taskList
+  save()
 }
 
 const sort = () => {
@@ -50,6 +59,7 @@ const createTasks = () => {
   return {
     add: add,
     remove: remove,
+    update: update,
     sort: sort,
     save: save,
     reset: reset
