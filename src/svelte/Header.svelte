@@ -24,7 +24,7 @@
       <Select name="tag" list="{tagList}" bind:selected="{tag}" />
     </div>
     <div class="sort">
-      <Select name="sort" list="{sortOrderList}" bind:selected="{sortOrder}" onchange="{sortTasks}" onfocus="{sortTasks}" onblur="{sortTasks}" />
+      <Select name="sort" list="{sortOrderList}" bind:selected="{sortOrder}" onchange="{sortTasks}" onblur="{sortTasks}" />
     </div>
   </div>
 </div>

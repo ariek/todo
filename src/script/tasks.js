@@ -37,12 +37,21 @@ const update = (create,key,value) => {
 
 const sort = (key = 'date', orderBy = 'ASC') => {
   const sortByKey = (key,orderBy = 'ASC') => {
-    taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (Number(a[key]) - Number(b[key])))
+    //taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (Number(a[key]) - Number(b[key])))
+    taskList = taskList.sort((a,b) => {
+      let flg = 0
+      if(a[key] > b[key]) flg = 1
+      else if(a[key] < b[key]) flg = -1
+      if(orderBy.toUpperCase() === 'DESC') flg * -1
+      return flg
+    })
   }
   taskList.forEach(item => {
     item.timestamp = moment(item.date || '1970-01-01').format('X')
   })
-  sortByKey('create')
+  if(key){
+    sortByKey('create')
+  }
   if(key === 'date'){
     sortByKey('priority')
     sortByKey('timestamp', orderBy)
@@ -53,6 +62,10 @@ const sort = (key = 'date', orderBy = 'ASC') => {
     sortByKey('priority')
     sortByKey('timestamp')
     sortByKey('tag', orderBy)
+  } else if(key === 'title'){
+    sortByKey('priority')
+    sortByKey('timestamp')
+    sortByKey('title', orderBy)
   }
   save()
 }
