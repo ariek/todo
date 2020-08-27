@@ -43,12 +43,12 @@
     {#if !$taskListData[i - 1] || getDateStr($taskListData[i - 1].date) !== getDateStr(item.date)}
       <!-- div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div -->
     {/if}
-    <div class="task" tabindex="0" data-create="{item.create}" data-priority="{item.priority}" data-done="{item.done}">
+    <div class="task" data-create="{item.create}" data-priority="{item.priority}" data-done="{item.done}">
       <div class="main">
         <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
         <form autocomplete="off" class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}" on:blur="{tasks.save}"></form>
         <div class="close">
-          <button type="button" on:click="{(e) => {e.target.blur()}}">×</button>
+          <button type="button" on:click="{e => e.target.blur()}">×</button>
         </div>   
       </div>
       <div class="property">

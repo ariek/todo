@@ -22,10 +22,10 @@ export const statusList = [
 
 export const tagList = [
   {value: '', text: 'タグ'},
-  {value: '仕事', text: '仕事'},
-  {value: '趣味', text: '趣味'},
-  {value: 'メモ', text: 'メモ'},
-  {value: '生活', text: '生活'}
+  {value: '1', text: '仕事'},
+  {value: '2', text: '趣味'},
+  {value: '3', text: 'メモ'},
+  {value: '4', text: '生活'}
 ]
 
 export const sortOrderList = [

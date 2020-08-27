@@ -37,7 +37,7 @@ const update = (create,key,value) => {
 
 const sort = (key = 'date', orderBy = 'ASC') => {
   const sortByKey = (key,orderBy = 'ASC') => {
-    taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (a[key] - b[key]))
+    taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (Number(a[key]) - Number(b[key])))
   }
   taskList.forEach(item => {
     item.timestamp = moment(item.date || '1970-01-01').format('X')
