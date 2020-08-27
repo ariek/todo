@@ -1,6 +1,8 @@
 <script>
+  import Input from './Input.svelte';
+  import Select from './Select.svelte';
   import moment from 'moment'
-  import { tagList, priorityList } from '../script/config.js';
+  import { tagList, priorityList, dateToString } from '../script/config.js';
   import { taskListData } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
@@ -43,7 +45,7 @@
     {#if !$taskListData[i - 1] || getDateStr($taskListData[i - 1].date) !== getDateStr(item.date)}
       <!-- div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div -->
     {/if}
-    <div class="task" data-create="{item.create}" data-priority="{item.priority}" data-done="{item.done}">
+    <div class="task" data-create="{item.create}" data-priority="{item.priority.value}" data-done="{item.done}">
       <div class="main">
         <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
         <form autocomplete="off" class="title" on:submit|preventDefault="{onSubmitTitleForm}"><input type="text" name="title" bind:value="{item.title}" on:change="{tasks.save}" on:blur="{tasks.save}"></form>
@@ -55,34 +57,17 @@
         <div class="remove">
           <button type="button" class="m-remove" on:click="{onClickRemoveBtn}" data-create="{item.create}">削除</button>
         </div>
-        <div class="schedule">
-          <div class="m-schedule" data-value="{item.date}">
-            <label>
-              <input type="date" name="date" bind:value="{item.date}" on:change="{tasks.save}" on:blur="{tasks.save}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-            </label>
-          </div>
+        <div class="date">
+          <Input type="date" name="date" bind:data="{item.date}" onchange="{() => {
+            item.date.text = dateToString(item.date.value)
+            tasks.save()
+          }}" />
         </div>
         <div class="priority">
-          <div class="m-priority" data-value="{item.priority}">
-            <label>
-              <select name="priority" bind:value="{item.priority}" on:change="{tasks.save}" on:blur="{tasks.save}">
-                {#each priorityList as priorityListItem}
-                  <option value="{priorityListItem.value}">{priorityListItem.text}</option>
-                {/each}
-              </select>
-            </label>
-          </div>
+          <Select name="priority" list="{priorityList}" bind:selected="{item.priority}" onchange="{tasks.save}" onblur="{tasks.save}" />
         </div>
         <div class="tag">
-          <div class="m-tag" data-value="{item.tag}">
-            <label>
-              <select bind:value="{item.tag}" on:change="{tasks.save}" on:blur="{tasks.save}">
-                {#each tagList as tagListItem}
-                  <option value="{tagListItem.value}">{tagListItem.text}</option>
-                {/each}
-              </select>
-            </label>
-          </div>
+          <Select name="tag" list="{tagList}" bind:selected="{item.tag}" onchange="{tasks.save}" onblur="{tasks.save}" />
         </div>
       </div>
     </div>

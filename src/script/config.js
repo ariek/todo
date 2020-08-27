@@ -1,3 +1,7 @@
+import moment from 'moment'
+
+export const dayList =  ['日','月','火','水','木','金','土']
+
 export const priorityList = [
   {value: 1, text: '優先順 1'},
   {value: 2, text: '優先順 2'},
@@ -23,9 +27,9 @@ export const statusList = [
 export const tagList = [
   {value: '', text: 'タグ'},
   {value: '1', text: '仕事'},
-  {value: '4', text: '生活'},
-  {value: '2', text: '趣味'},
-  {value: '3', text: 'メモ'}
+  {value: '2', text: '生活'},
+  {value: '3', text: '趣味'},
+  {value: '4', text: 'メモ'}
 ]
 
 export const sortOrderList = [
@@ -33,5 +37,19 @@ export const sortOrderList = [
   {value: 'date', text: '日付順'},
   {value: 'priority', text: '優先順'},
   {value: 'tag', text: 'タグ順'},
-  {value: 'title', text: 'タイトル順'},
+  {value: 'title', text: '名前順'},
 ]
+
+/**
+ * dateToString(dateStr)
+ * @param {String} dateStr 'YYYY-MM-DD'
+ * @return {String} 'YYYY/M/D(e)','M/D(e)','未定'
+ */
+export const dateToString = (dateStr = '') => {
+  let thisYear = moment().format('YYYY')
+  let d = moment(dateStr)
+  let year = d.format('YYYY')
+  let date = (thisYear != year) ? d.format('YYYY/M/D') : d.format('M/D')
+  let day = dayList[d.format('e')]
+  return (dateStr) ? date + '(' + day + ')' : '未定'
+}

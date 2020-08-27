@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { priorityList, tagList, dateToString } from '../script/config.js'
 import { taskListData } from './stores.js';
 
 let taskList = JSON.parse(localStorage.getItem('taskListData')) || []
@@ -9,13 +9,11 @@ const add = (title,tag,priority,date) => {
   let item = {
     create: now.getTime(),
     title: title,
-    tag: tag || '',
-    priority: priority || 0,
-    date: date || '1970-01-01',
-    timestamp: moment(date || '1970-01-01').format('X'),
+    tag: tag || tagList[0],
+    priority: priority || priorityList[3],
+    date: date || {value: '', text: dateToString('')},
     repeat: false,
-    done: false,
-    property: false
+    done: false
   }
   taskList.push(item)
   save()
@@ -40,31 +38,33 @@ const sort = (key = 'date', orderBy = 'ASC') => {
     //taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (Number(a[key]) - Number(b[key])))
     taskList = taskList.sort((a,b) => {
       let flg = 0
-      if(a[key] > b[key]) flg = 1
-      else if(a[key] < b[key]) flg = -1
+      let valA = a[key].value || a[key]
+      let valB = b[key].value || b[key]
+      if(valA > valB){
+        flg = 1
+      } else if(valA < valB){
+        flg = -1
+      }
       if(orderBy.toUpperCase() === 'DESC') flg * -1
       return flg
     })
   }
-  taskList.forEach(item => {
-    item.timestamp = moment(item.date || '1970-01-01').format('X')
-  })
   if(key){
     sortByKey('create')
   }
   if(key === 'date'){
     sortByKey('priority')
-    sortByKey('timestamp', orderBy)
+    sortByKey('date', orderBy)
   } else if(key === 'priority'){
-    sortByKey('timestamp')
+    sortByKey('date')
     sortByKey('priority', orderBy)
   } else if(key === 'tag'){
     sortByKey('priority')
-    sortByKey('timestamp')
+    sortByKey('date')
     sortByKey('tag', orderBy)
   } else if(key === 'title'){
     sortByKey('priority')
-    sortByKey('timestamp')
+    sortByKey('date')
     sortByKey('title', orderBy)
   }
   save()
@@ -92,3 +92,11 @@ const createTasks = () => {
 }
 
 export const tasks = createTasks()
+
+taskList.forEach(item => {
+  delete item.timestamp
+  if(!item.date.value) item.date = {value: '', text: dateToString('')}
+  if(!item.priority.value) item.priority = priorityList[3]
+  if(!item.tag.value) item.tag = tagList[0]
+  save()
+})
