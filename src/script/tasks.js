@@ -92,11 +92,3 @@ const createTasks = () => {
 }
 
 export const tasks = createTasks()
-
-taskList.forEach(item => {
-  delete item.timestamp
-  if(!item.date.value) item.date = {value: '', text: dateToString('')}
-  if(!item.priority.value) item.priority = priorityList[3]
-  if(!item.tag.value) item.tag = tagList[0]
-  save()
-})

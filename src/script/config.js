@@ -9,13 +9,14 @@ export const priorityList = [
   {value: 4, text: '優先順 4'}
 ]
 
-export const dueDateList = [
-  {value: '', text: '期間'},
-  {value: 'today', text: '今日まで'},
-  {value: 'thisweek', text: '今週まで'},
-  {value: 'thisweek', text: '今月まで'},
-  {value: 'thisyear', text: '今年まで'},
-  {value: 'over', text: '期限切れ'},
+export let dueDateList = [
+  {value: '', text: '期間', condition: '9999-99-99'},
+  {value: 'today', text: '今日中', condition: moment().format('YYYY-MM-DD')},
+  {value: 'tomorrow', text: '明日中', condition: moment().add(1, 'days').format('YYYY-MM-DD')},
+  {value: 'thisweek', text: '今週中', condition: moment().startOf('week').add(1, 'week').format('YYYY-MM-DD')},
+  {value: 'thismonth', text: '今月中', condition: moment().startOf('month').add(1, 'months').add(-1, 'days').format('YYYY-MM-DD')},
+  {value: 'thisyear', text: '今年中', condition: moment().startOf('year').add(1, 'years').add(-1, 'days').format('YYYY-MM-DD')},
+  {value: 'over', text: '期限切れ', condition: moment().add(-1, 'days').format('YYYY-MM-DD')},
 ]
 
 export const statusList = [

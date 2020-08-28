@@ -1,54 +1,17 @@
-.m-priority
-.m-schedule
-.m-tag
-  height 20px
-  position relative
-  border-radius 3px
-  color $linkColor
-  background rgba(102, 119, 136, .1)
-  &::before
-    content ""
-    position absolute
-    top 0
-    left 0
-    height 20px
-    width 20px
-    background no-repeat 50% 50% / 16px 
-  label
-    width 100px
-    height 20px
-    display block
-  input[type="date"]
-  select
-    padding 0 0 0 (20*16/12)px
-    display block
-    transform scale(12/16)
-    transform-origin left top
-    width (16/12*100)%
-    height (16/12*100)%
-    outline 0
-    border 0
-    background transparent
-    text-overflow '...'
-    appearance none
-    &:focus
-      background transparent
-
 .m-remove
-  padding 0 0 0 20px
+  padding 0 5px 0 20px
   border 0
   outline 0
-  width 50px
-  height 20px
-  font-size 12px
+  height 24px
+  font-size 14px
   text-align left
-  height 20px
   position relative
   border-radius 3px
   color $linkColor
   //background rgba(102, 119, 136, .1)
   background transparent
   border 1px solid $linkColor
+  display inline-block
   &::before
     content ""
     position absolute
@@ -58,35 +21,9 @@
     width 20px
     background no-repeat 50% 50% / 16px 
     background-image url('../img/trash.svg')
-
-.m-date
-
-  label
-    width 100px
-  input[type="date"]
-    text-align center
-    &:focus
-      background transparent
-    &::-webkit-inner-spin-button
-    &::-webkit-clear-button
-      -webkit-appearance none
-    &::-webkit-calendar-picker-indicator
-      position absolute
-      left 0
-      top 0
-      bottom 0
-      margin auto
-      padding 0
-      background transparent
-      color transparent
-      cursor pointer
-      height (30*16/12)px
-      width (130*16/12)px
-      z-index 1
-
 .m-select
 .m-input
-  padding-left 20px
+  padding-left 24px
   padding-right 5px
   display inline-block
   position relative
@@ -94,8 +31,8 @@
   border-radius 3px
   color $linkColor
   background rgba(102, 119, 136, .1)
-  font-size 12px
-  line-height 18px
+  font-size 14px
+  line-height 22px
   overflow hidden
   &:focus-within
     border-color $linkColor
@@ -104,8 +41,8 @@
     position absolute
     left 0
     top 0
-    width 20px
-    height 20px
+    width 22px
+    height 22px
     background no-repeat 50% 50% / 16px
   &[data-value=""]
     &:before
@@ -133,16 +70,16 @@
 .m-select
   &.-dueDate
     &::before
-      background-image url('../img/tag.svg')
+      background-image url('../img/calendar-event.svg')
   &.-status
     &::before
-      background-image url('../img/tag.svg')
+      background-image url('../img/circle-check.svg')
   &.-tag
     &::before
       background-image url('../img/tag.svg')
   &.-sort
     &::before
-      background-image url('../img/tag.svg')
+      background-image url('../img/arrows-sort.svg')
   &.-priority
     &::before
       background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23808080%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
@@ -152,4 +89,3 @@
       background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23FF9800%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
     &[data-value="3"]::before
       background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%238BC34A%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
-

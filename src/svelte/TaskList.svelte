@@ -2,8 +2,8 @@
   import Input from './Input.svelte';
   import Select from './Select.svelte';
   import moment from 'moment'
-  import { tagList, priorityList, dateToString } from '../script/config.js';
-  import { taskListData } from '../script/stores.js';
+  import { tagList, priorityList, dateToString, dueDateList } from '../script/config.js';
+  import { taskListData, filteringCondition } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
   const onClickRemoveBtn = (e) => {
@@ -42,9 +42,14 @@
 </script>
 <div class="c-taskList">
   {#each $taskListData as item, i}
+    {#if !($filteringCondition.dueDate == 'over' && !item.date.value) && dueDateList.filter(d => d.value == $filteringCondition.dueDate)[0].condition >= item.date.value}
+    {#if $filteringCondition.status == '' || (!item.done && $filteringCondition.status == 'todo') || (item.done && $filteringCondition.status == 'done')}
+    {#if $filteringCondition.tag == '' || item.tag.value == $filteringCondition.tag}
+    <!--
     {#if !$taskListData[i - 1] || getDateStr($taskListData[i - 1].date) !== getDateStr(item.date)}
-      <!-- div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div -->
+       div class="date"><span class="dateInner">{@html getDateStr(item.date)}</span></div>
     {/if}
+    -->
     <div class="task" data-create="{item.create}" data-priority="{item.priority.value}" data-done="{item.done}">
       <div class="main">
         <label class="done"><input type="checkbox" bind:checked="{item.done}" on:change="{tasks.save}" data-create="{item.create}"><span>Done</span></label>
@@ -71,6 +76,9 @@
         </div>
       </div>
     </div>
+    {/if}
+    {/if}
+    {/if}
   {/each}
 </div>
 

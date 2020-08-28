@@ -34,16 +34,17 @@
     height 34px
     overflow hidden
     transition height .15s
+    display flex
+    justify-content space-between
     &:focus-within
-      height 60px
-      .close
-        opacity 1
-        visibility visible
+      height 66px
+      display block
     + .task
       border-top 1px dotted rgba(0,0,0,.1)
     .main
       margin-bottom 2px
       display flex
+      flex 1
     &[data-done="true"]
       .title input[type="text"]
         text-decoration line-through
@@ -79,20 +80,27 @@
     input[type="text"]
       transform scale(14/16)
       transform-origin left top
-      padding 0
+      padding 0 5px
       outline 0
       border 0
       width (16/14*100)%
       height (16/14*100)%
       background $baseColor
   .close
-    opacity 0
-    visibility hidden
+    display none
+  .task:focus-within
+    .close
+      display block
   .property
     display flex
     justify-content flex-end
     position relative
-    padding-left 55px
+    padding-left 0
+    height 30px
+    align-items center
+  .task:focus-within
+    .property
+      padding-left 55px
   .tag
   .priority
   .date
@@ -101,4 +109,53 @@
   .remove
     position absolute
     left 0
-    top 0
+    top 2px
+    display none
+  .task:focus-within
+    .remove
+      display block
+  .date
+    margin-left 0
+    height 24px
+    overflow hidden
+    > *
+      margin-left -19px
+      font-size 12px
+  .task:focus-within
+    .date
+      margin-left 5px
+      > *
+        margin-left 0
+        font-size 14px
+  .priority
+    margin-left 0
+    width 14px
+    height 24px
+    overflow hidden
+    > *
+      margin-left -5px
+      font-size 12px
+  .task:focus-within
+    .priority
+      margin-left 5px
+      width auto
+      height auto
+      > *
+        margin-left 0
+        font-size 14px
+  .tag
+    margin-left 0
+    width calc(10px + 2em)
+    height 24px
+    overflow hidden
+    > *
+      margin-left -19px
+      font-size 12px
+  .task:focus-within
+    .tag
+      margin-left 5px
+      width auto
+      height auto
+      > *
+        margin-left 0
+        font-size 14px
