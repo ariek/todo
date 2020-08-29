@@ -23,6 +23,7 @@ export const statusList = [
   {value: '', text: '状態'},
   {value: 'todo', text: '未完了'},
   {value: 'done', text: '完了済み'},
+  {value: 'removed', text: '削除済み'},
 ]
 
 export const tagList = [
@@ -47,10 +48,19 @@ export const sortOrderList = [
  * @return {String} 'YYYY/M/D(e)','M/D(e)','未定'
  */
 export const dateToString = (dateStr = '') => {
+  let returnStr = '未定'
   let thisYear = moment().format('YYYY')
   let d = moment(dateStr)
   let year = d.format('YYYY')
   let date = (thisYear != year) ? d.format('YYYY/M/D') : d.format('M/D')
   let day = dayList[d.format('e')]
-  return (dateStr) ? date + '(' + day + ')' : '未定'
+  if(d.format('YYYY/M/D') == moment().format('YYYY/M/D')){
+    returnStr = '今日'
+  } else if(d.format('YYYY/M/D') == moment().add(1,'days').format('YYYY/M/D')){
+    returnStr = '明日'
+  } else if(dateStr) {
+    returnStr = date + '(' + day + ')'
+  }
+
+  return returnStr
 }

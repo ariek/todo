@@ -14,7 +14,7 @@
 
   const onSubmitForm = (e) => {
     tasks.add(title,tag,priority,date)
-    e.target.title.value = ''
+    title = ''
   }
 
   const onChangeDate = () => {
@@ -22,8 +22,8 @@
   }
 
 </script>
-<div class="c-taskInput" tabindex="0">
-  <form autocomplete="off" on:submit|preventDefault="{onSubmitForm}">
+<div class="c-taskInput{title ? ' is-active' : ''}" tabindex="0">
+  <form action="." autocomplete="off" on:submit|preventDefault="{onSubmitForm}">
     <div class="title">
       <div class="titleInner"><input type="text" name="title" bind:value="{title}" placeholder="やることを入力"></div>
     </div>

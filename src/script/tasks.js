@@ -13,7 +13,8 @@ const add = (title,tag,priority,date) => {
     priority: priority || priorityList[3],
     date: date || {value: '', text: dateToString('')},
     repeat: false,
-    done: false
+    done: false,
+    removed: false
   }
   taskList.push(item)
   save()
@@ -25,10 +26,12 @@ const remove = (create) => {
 }
 
 const update = (create,key,value) => {
-  let index = taskList.findIndex((item) => {
-    return item.create === create
-  })
-  taskList[index][key] = value
+  let task = taskList.filter(item => item.create == create)[0]
+  if(!task){
+    console.error('[tasks update] task not found')
+    return false
+  }
+  task[key] = value
   taskList = taskList
   save()
 }

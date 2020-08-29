@@ -2,8 +2,8 @@ import { writable } from 'svelte/store';
 
 let initTaskListData = JSON.parse(localStorage.getItem('taskListData')) || []
 let filteringConditionData = JSON.parse(localStorage.getItem('filteringConditionData')) || {
-  'dueDate': 'thisweek',
-  'status': 'todo',
+  'dueDate': '',
+  'status': '',
   'tag': '',
   'sortOrder': ''
 }

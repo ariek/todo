@@ -3,7 +3,7 @@
   import TaskList from './TaskList.svelte';
   import TaskInput from './TaskInput.svelte';
 </script>
-<div class="l-page">
+<div class="l-page" on:click="{() => {}}">
   <div class="l-topBar">
     <Header />
   </div>
