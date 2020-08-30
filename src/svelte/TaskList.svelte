@@ -45,12 +45,12 @@
 
   //tasks.reset()
 </script>
-<div class="c-taskList" data-duedate="{$filteringCondition.dueDate}" data-status="{$filteringCondition.status}" data-tag="{$filteringCondition.tag}" data-sort="{$filteringCondition.sort}">
-  {#each $taskListData as item, i}
-    {#if ($filteringCondition.status != 'removed' && !item.removed) || ($filteringCondition.status == 'removed' && item.removed)}
-    {#if !($filteringCondition.dueDate == 'over' && !item.date.value) && dueDateList.filter(d => d.value == $filteringCondition.dueDate)[0].condition >= item.date.value}
-    {#if $filteringCondition.status == '' || (!item.done && $filteringCondition.status == 'todo') || (item.done && $filteringCondition.status == 'done') || (item.removed && $filteringCondition.status == 'removed')}
-    {#if $filteringCondition.tag == '' || item.tag.value == $filteringCondition.tag}
+<div class="c-taskList" data-duedate="{$filteringCondition.dueDate.value}" data-status="{$filteringCondition.status.value}" data-tag="{$filteringCondition.tag.value}" data-sortorder="{$filteringCondition.sortOrder.value}">
+  {#each $taskListData as item}
+    {#if ($filteringCondition.status.value != 'removed' && !item.removed) || ($filteringCondition.status.value == 'removed' && item.removed)}
+    {#if !($filteringCondition.dueDate.value == 'over' && !item.date.value) && $filteringCondition.dueDate.condition >= item.date.value}
+    {#if $filteringCondition.status.value == '' || (!item.done && $filteringCondition.status.value == 'todo') || (item.done && $filteringCondition.status.value == 'done') || (item.removed && $filteringCondition.status.value == 'removed')}
+    {#if $filteringCondition.tag.value == '' || item.tag.value == $filteringCondition.tag.value}
     <div class="task" data-create="{item.create}" data-priority="{item.priority.value}" data-done="{item.done}" tabindex="0">
       <div class="main">
         <div class="done">

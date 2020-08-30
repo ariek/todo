@@ -1,7 +1,8 @@
 <script>
   import Input from './Input.svelte';
   import Select from './Select.svelte';
-  import { priorityList, tagList, dateToString } from '../script/config.js'
+  import { priorityList, dueDateList, statusList, tagList, dateToString } from '../script/config.js'
+  import { filteringCondition } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
   let title = ''
@@ -13,12 +14,30 @@
   let tag = tagList[0]
 
   const onSubmitForm = (e) => {
+    if($filteringCondition.tag.value != tag.value){
+      $filteringCondition.tag = tagList[0]
+    }
+    if($filteringCondition.status.value != 'todo'){
+      $filteringCondition.status = statusList[0]
+    }
+    if($filteringCondition.dueDate.value >= date.value){
+      $filteringCondition.dueDate = dueDateList[0]
+    }
+    localStorage.setItem('filteringConditionData',JSON.stringify($filteringCondition))
     tasks.add(title,tag,priority,date)
     title = ''
+
+    setTimeout(() => {
+      let element = document.querySelector('.l-content')
+      element.scrollTo(0, element.scrollHeight)
+    }, 1)
   }
 
-  const onChangeDate = () => {
-    date.text = dateToString(date.value)
+  const onChangeDate = (e) => {
+    date = {
+      value: e.target.value,
+      text: dateToString(e.target.value)
+    }
   }
 
 </script>
@@ -32,7 +51,7 @@
     </div>
     <div class="property">
       <div class="date">
-        <Input type="date" name="date" bind:data="{date}" onchange="{onChangeDate}" />
+        <Input type="date" name="date" data="{date}" onchange="{onChangeDate}" />
       </div>
       <div class="priority">
         <Select name="priority" list="{priorityList}" bind:selected="{priority}" />
