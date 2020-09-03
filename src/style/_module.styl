@@ -1,13 +1,14 @@
 .m-select
 .m-input
+.m-btn
   padding-left 24px
   padding-right 5px
-  display inline-block
+  display block
   position relative
   border 1px solid transparent
   border-radius 3px
   color $linkColor
-  background rgba(102, 119, 136, .1)
+  background $inputBgColor
   font-size 14px
   line-height 22px
   overflow hidden
@@ -70,3 +71,12 @@
       background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%23FF9800%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
     &[data-value="3"]::before
       background-image url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2024%22%20stroke-width%3D%221.5%22%20stroke%3D%22%238BC34A%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20stroke%3D%22none%22%20d%3D%22M0%200h24v24H0z%22%2F%3E%3Cline%20x1%3D%225%22%20y1%3D%225%22%20x2%3D%225%22%20y2%3D%2221%22%20%2F%3E%3Cline%20x1%3D%2219%22%20y1%3D%225%22%20x2%3D%2219%22%20y2%3D%2214%22%20%2F%3E%3Cpath%20d%3D%22M5%205a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3Cpath%20d%3D%22M5%2014a5%205%200%200%201%207%200a5%205%200%200%200%207%200%22%20%2F%3E%3C%2Fsvg%3E')
+.m-btn
+  //box-shadow 1px 1px 1px 0 rgba(0,0,0,.05), -1px -1px 1px 0 rgba(255,255,255,.5)
+  //border-radius 6px
+  &.-remove
+    &::before
+      background-image url('../img/trash.svg') 
+  &.-add
+    &::before
+      background-image url('../img/add.svg') 

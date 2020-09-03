@@ -1,7 +1,7 @@
 <script>
   import Select from './Select.svelte';
-  import { dueDateList, statusList, tagList, sortOrderList } from '../script/config.js'
-  import { filteringCondition } from '../script/stores.js';
+  import { dueDateList, statusList, sortOrderList } from '../script/config.js'
+  import { filteringCondition, tagListData } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
   const filterTasks = () => {
@@ -22,7 +22,7 @@
       <Select name="status" list="{statusList}" bind:selected="{$filteringCondition.status}"  onchange="{filterTasks}" onblur="{filterTasks}" />
     </div>
     <div class="tag">
-      <Select name="tag" list="{tagList}" bind:selected="{$filteringCondition.tag}" onchange="{filterTasks}" onblur="{filterTasks}" />
+      <Select name="tag" list="{$tagListData}" bind:selected="{$filteringCondition.tag}" onchange="{filterTasks}" onblur="{filterTasks}" />
     </div>
     <div class="sort">
       <Select name="sort" list="{sortOrderList}" bind:selected="{$filteringCondition.sortOrder}" onchange="{sortTasks}" onblur="{sortTasks}" />

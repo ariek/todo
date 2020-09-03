@@ -1,8 +1,8 @@
 <script>
   import Input from './Input.svelte';
   import Select from './Select.svelte';
-  import { priorityList, dueDateList, statusList, tagList, dateToString } from '../script/config.js'
-  import { filteringCondition } from '../script/stores.js';
+  import { priorityList, dueDateList, statusList, dateToString } from '../script/config.js'
+  import { filteringCondition, tagListData } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
   let title = ''
@@ -11,11 +11,11 @@
     text: dateToString('')
   }
   let priority = priorityList[3]
-  let tag = tagList[0]
+  let tag = $tagListData[0]
 
   const onSubmitForm = (e) => {
     if($filteringCondition.tag.value != tag.value){
-      $filteringCondition.tag = tagList[0]
+      $filteringCondition.tag = $tagListData[0]
     }
     if($filteringCondition.status.value != 'todo'){
       $filteringCondition.status = statusList[0]
@@ -57,7 +57,7 @@
         <Select name="priority" list="{priorityList}" bind:selected="{priority}" />
       </div>
       <div class="tag">
-        <Select name="tag" list="{tagList}" bind:selected="{tag}" />
+        <Select name="tag" list="{$tagListData}" bind:selected="{tag}" />
       </div>
     </div>
   </form>

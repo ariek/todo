@@ -2,8 +2,8 @@
   import Input from './Input.svelte';
   import Select from './Select.svelte';
   import moment from 'moment'
-  import { tagList, priorityList, dateToString, dueDateList } from '../script/config.js';
-  import { taskListData, filteringCondition } from '../script/stores.js';
+  import { priorityList, dateToString, dueDateList } from '../script/config.js';
+  import { taskListData, filteringCondition, tagListData } from '../script/stores.js';
   import { tasks } from '../script/tasks.js'
 
   const onSubmitTitleForm = (e) => {
@@ -51,7 +51,7 @@
     {#if !($filteringCondition.dueDate.value == 'over' && !item.date.value) && $filteringCondition.dueDate.condition >= item.date.value}
     {#if $filteringCondition.status.value == '' || (!item.done && $filteringCondition.status.value == 'todo') || (item.done && $filteringCondition.status.value == 'done') || (item.removed && $filteringCondition.status.value == 'removed')}
     {#if $filteringCondition.tag.value == '' || item.tag.value == $filteringCondition.tag.value}
-    <div class="task" data-create="{item.create}" data-priority="{item.priority.value}" data-done="{item.done}" tabindex="0">
+    <div class="task" data-create="{item.create}" data-priority="{item.priority.value}" data-done="{item.done}">
       <div class="main">
         <div class="done">
           <label><input type="checkbox" name="done" checked="{item.done}" on:change="{onChangeCheckBox}"><span>完了</span></label>
@@ -65,7 +65,7 @@
           }}">閉じる</button>
         </div>   
       </div>
-      <div class="property">
+      <div class="property" tabindex="0">
         <div class="remove">
           <label class="m-input -remove"><input type="checkbox" name="removed" checked="{item.removed}" on:change="{onChangeCheckBox}"><span class="m-input_text -remove">{#if item.removed}元に戻す{:else}削除{/if}</span></label>
         </div>
@@ -76,7 +76,7 @@
           <Select name="priority" list="{priorityList}" selected="{item.priority}" onblur="{onChangeSelect}" />
         </div>
         <div class="tag">
-          <Select name="tag" list="{tagList}" selected="{item.tag}" onblur="{onChangeSelect}" />
+          <Select name="tag" list="{$tagListData}" selected="{item.tag}" onblur="{onChangeSelect}" />
         </div>
       </div>
     </div>

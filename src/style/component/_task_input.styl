@@ -1,27 +1,28 @@
 .c-taskInput
   background $baseColor
-  box-shadow 0 -5px 10px rgba(0,0,0,.05)
-  height 50px
+  box-shadow 0 -5px 15px rgba(0,0,0,.03)
+  height 52px
   transition height .15s
   position relative
   overflow hidden
   outline none
   &.is-active
   &:focus-within
-    height 79px
+    height 84px
   form
     position absolute
-    left 10px
-    right 10px
-    top 5px
+    left 12px
+    right 12px
+    top 8px
     height 74px
   .title
-    padding 10px 40px 10px 15px
-    border-radius 20px
+    padding 8px 40px 8px 15px
+    border-radius 12px
     //width calc(100% - 70px)
-    height 40px
-    background $baseColor
-    box-shadow 1px 1px 2px rgba(0,0,0,0.15) inset, 1px 1px 2px rgba(255,255,255,1)
+    height 36px
+    //background $baseColor
+    //box-shadow 1px 1px 2px rgba(0,0,0,0.15) inset, 1px 1px 2px rgba(255,255,255,1)
+    background $inputBgColor
     .titleInner
       width 100%
       height 20px
@@ -35,15 +36,18 @@
       outline 0
       border 0
       //color $linkColor
-      background $baseColor
+      //background $baseColor
+      background $inputBgColor
       &:focus
-        background $baseColor
+        //background $baseColor
+        background $inputBgColor
       &::placeholder
-        color rgba(102, 119, 136, .4)
+        //color rgba(102, 119, 136, .4)
+        color rgba(0, 0, 0, .2)
   .submit
     position absolute
-    right 5px
-    top 5px
+    right 3px
+    top 3px
     button.add
       width 30px
       height 30px
@@ -55,12 +59,13 @@
       border-radius 15px
       color $linkColor
       background url('../img/add.svg') no-repeat 50% 50% $baseColor
-      box-shadow 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 2px rgba(255,255,255,1) inset
+      //background url('../img/add.svg') no-repeat 50% 50% $inputBgColor
+      //box-shadow 1px 1px 2px rgba(0,0,0,0.15), 1px 1px 2px rgba(255,255,255,1) inset
       outline none
   .property
-    padding 5px 0
+    padding 8px 0
     width 100%
-    height 30px
+    height 40px
     display flex
     justify-content flex-end
     overflow hidden

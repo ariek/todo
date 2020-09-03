@@ -1,4 +1,4 @@
-import { priorityList, tagList, dateToString } from '../script/config.js'
+import { priorityList, dateToString, defaultTag } from '../script/config.js'
 import { taskListData } from './stores.js';
 
 let taskList = JSON.parse(localStorage.getItem('taskListData')) || []
@@ -9,7 +9,7 @@ const add = (title,tag,priority,date) => {
   let item = {
     create: now.getTime(),
     title: title,
-    tag: tag || tagList[0],
+    tag: tag || defaultTag,
     priority: priority || priorityList[3],
     date: date || {value: '', text: dateToString('')},
     repeat: false,
@@ -26,13 +26,20 @@ const remove = (create) => {
 }
 
 const update = (create,key,value) => {
-  let task = taskList.filter(item => item.create == create)[0]
-  if(!task){
-    console.error('[tasks update] task not found')
-    return false
-  }
-  task[key] = value
-  taskList = taskList
+  taskList.forEach(item => {
+    if(item.create == create){
+      item[key] = value
+    }
+  })
+  save()
+}
+
+const updateTag = (tag) => {
+  taskList.forEach(item => {
+    if(item.tag.value == tag.value){
+      item.tag = tag.text ? tag : defaultTag
+    }
+  })
   save()
 }
 
@@ -88,6 +95,7 @@ const createTasks = () => {
     add: add,
     remove: remove,
     update: update,
+    updateTag: updateTag,
     sort: sort,
     save: save,
     reset: reset

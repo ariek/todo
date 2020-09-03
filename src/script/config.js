@@ -26,14 +26,6 @@ export const statusList = [
   {value: 'removed', text: '削除済み'},
 ]
 
-export const tagList = [
-  {value: '', text: 'タグ'},
-  {value: '1', text: '仕事'},
-  {value: '2', text: '生活'},
-  {value: '3', text: '趣味'},
-  {value: '4', text: 'メモ'}
-]
-
 export const sortOrderList = [
   {value: '', text: '並べ替え'},
   {value: 'date', text: '日付順'},
@@ -41,6 +33,8 @@ export const sortOrderList = [
   {value: 'tag', text: 'タグ順'},
   {value: 'title', text: '名前順'},
 ]
+
+export const defaultTag = {value: '', text: 'タグ'}
 
 /**
  * dateToString(dateStr)
