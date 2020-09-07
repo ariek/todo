@@ -43,6 +43,13 @@ const updateTag = (tag) => {
   save()
 }
 
+const updateDateValue = () => {
+  taskList.forEach(item => {
+    item.date.text = dateToString(item.date.value)
+  })
+  save()
+}
+
 const sort = (key = 'date', orderBy = 'ASC') => {
   const sortByKey = (key,orderBy = 'ASC') => {
     //taskList = taskList.sort((a,b) => ((orderBy.toUpperCase() === 'DESC') ? -1 : 1) * (Number(a[key]) - Number(b[key])))
@@ -96,10 +103,13 @@ const createTasks = () => {
     remove: remove,
     update: update,
     updateTag: updateTag,
+    updateDateValue: updateDateValue,
     sort: sort,
     save: save,
     reset: reset
   }
 }
+
+updateDateValue()
 
 export const tasks = createTasks()
