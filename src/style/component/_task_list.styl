@@ -45,9 +45,14 @@
         + span:after
           border-color $red
   .done
+    .is-large &
+      padding-top 5px
+      width 36px
     label
       margin-left -5px
       checkbox-label()
+      .is-large &
+        margin-left 0
       input[type="checkbox"]
         + span
         + span:after
@@ -55,8 +60,12 @@
   .title
     padding 0 5px 0 0
     width calc(100% - 30px)
+    .is-large &
+      width calc(100% - 36px)
     form
       height 30px
+      .is-large &
+        height 40px
     input[type="text"]
       transform scale(14/16)
       transform-origin left top
@@ -66,6 +75,10 @@
       width (16/14*100)%
       height (16/14*100)%
       background $baseColor
+      .is-large &
+        transform none
+        width 100%
+        height 100%
   .close
     display none
     button
@@ -77,6 +90,9 @@
       height 30px
       overflow hidden
       text-indent -100vw
+      .is-large &
+        width 40px
+        height 40px
   .task:focus-within
     .close
       display block
@@ -88,6 +104,8 @@
     padding-left 0
     height 30px
     align-items center
+    .is-large &
+      height 40px
   .task:focus-within
     .property
       padding-left 55px
@@ -100,6 +118,8 @@
     left 0
     top 2px
     display none
+    .is-large &
+      top 7px
   .task:focus-within
     .remove
       display block

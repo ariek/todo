@@ -4,7 +4,7 @@
   import TaskInput from './TaskInput.svelte';
   import Setting from './Setting.svelte';
 </script>
-<div class="l-page" on:click="{() => {}}">
+<div class="l-page is-large" on:click="{() => {}}">
   <div class="l-topBar">
     <Header />
   </div>
